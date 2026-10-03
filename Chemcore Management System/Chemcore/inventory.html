@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inventory · ChemCore</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link rel="stylesheet" href="assets/css/variables.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
+
+<script src="assets/js/utils.js"></script>
+<script src="assets/js/storage.js"></script>
+<script src="assets/js/theme.js"></script>
+</head>
+<body class="app-body">
+
+<div class="page-loader" id="pageLoader">
+  <div class="spinner"></div>
+  <span class="loader-label">Loading ChemCore Inventory…</span>
+</div>
+
+<div class="app-shell">
+
+  <!-- ================= Sidebar ================= -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="brand-mark"><i class="fa-solid fa-flask-vial"></i></div>
+      <div class="brand-text"><strong>ChemCore</strong><span>Inventory</span></div>
+      <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Collapse sidebar"><i class="fa-solid fa-angles-left"></i></button>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+      <div class="nav-item"><a class="nav-link" href="dashboard.html"><i class="fa-solid fa-gauge-high"></i><span class="nav-text">Dashboard</span></a></div>
+      <div class="nav-item"><a class="nav-link" href="inventory.html"><i class="fa-solid fa-boxes-stacked"></i><span class="nav-text">Inventory</span></a></div>
+      <div class="nav-item"><a class="nav-link" href="safety.html"><i class="fa-solid fa-shield-heart"></i><span class="nav-text">Safety</span></a></div>
+      <div class="nav-item"><a class="nav-link" href="reports.html"><i class="fa-solid fa-chart-line"></i><span class="nav-text">Reports</span></a></div>
+      <div class="nav-section-label">Preferences</div>
+      <div class="nav-item"><a class="nav-link" href="settings.html"><i class="fa-solid fa-gear"></i><span class="nav-text">Settings</span></a></div>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="#" class="logout-link logout-trigger"><i class="fa-solid fa-right-from-bracket"></i><span class="nav-text">Log Out</span></a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ================= Main column ================= -->
+  <div class="main-col">
+    <header class="navbar">
+      <button class="navbar-menu-btn" id="navbarMenuBtn" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+      <div class="navbar-title">
+        <h1>Inventory</h1>
+        <p>Manage your chemical stock records</p>
+      </div>
+      <div class="navbar-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="globalSearchInput" placeholder="Search chemicals, IDs, categories…" autocomplete="off">
+        <div class="search-suggestions hidden" id="searchSuggestions"></div>
+      </div>
+      <div class="navbar-actions">
+        <button class="icon-btn navbar-theme-btn" aria-label="Toggle theme" data-tooltip="Toggle theme"><i class="fa-solid fa-moon"></i></button>
+
+        <div class="dropdown-wrap" id="notifDropdownWrap">
+          <button class="icon-btn dropdown-trigger" aria-label="Notifications" data-tooltip="Notifications">
+            <i class="fa-solid fa-bell"></i>
+            <span class="badge-dot hidden" id="notifBadge"></span>
+          </button>
+          <div class="dropdown-panel">
+            <div class="dropdown-header"><h4>Notifications</h4><button type="button" onclick="showToast('All caught up','Notifications marked as read.','success')">Mark all read</button></div>
+            <div class="notif-list" id="notifList"></div>
+          </div>
+        </div>
+
+        <div class="dropdown-wrap" id="profileDropdownWrap">
+          <button class="profile-btn dropdown-trigger">
+            <span class="profile-avatar">SM</span>
+            <span class="profile-meta"><strong class="profile-name">Samrudhi Mhaske</strong><span class="profile-role">Plant Supervisor</span></span>
+            <i class="fa-solid fa-chevron-down" style="font-size:10px;color:var(--text-muted);"></i>
+          </button>
+          <div class="dropdown-panel">
+            <div class="profile-menu-list">
+              <a href="settings.html"><i class="fa-solid fa-user"></i> My Profile</a>
+              <a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
+              <hr>
+              <button type="button" class="logout-trigger danger"><i class="fa-solid fa-right-from-bracket"></i> Log Out</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-content page-enter">
+
+      <div class="page-heading">
+        <div>
+          <span class="eyebrow"><i class="fa-solid fa-boxes-stacked"></i> Stock Records</span>
+          <h2>Chemical Inventory</h2>
+          <p class="text-secondary" id="invResultCount">0 chemicals</p>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-primary" id="addChemicalBtn"><i class="fa-solid fa-plus"></i> Add Chemical</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="filter-bar">
+          <div class="filter-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" class="form-control" id="invSearchInput" placeholder="Search by name, ID, or location…">
+          </div>
+          <select class="form-control" id="categoryFilter"></select>
+          <select class="form-control" id="statusFilter"></select>
+        </div>
+
+        <div class="table-scroll" id="inventoryTableWrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th class="sortable" data-sort-key="name">Chemical Name <i class="fa-solid sort-ico"></i></th>
+                <th class="sortable" data-sort-key="id">Chemical ID <i class="fa-solid sort-ico"></i></th>
+                <th class="sortable" data-sort-key="category">Category <i class="fa-solid sort-ico"></i></th>
+                <th class="sortable" data-sort-key="quantity">Quantity <i class="fa-solid sort-ico"></i></th>
+                <th>Unit</th>
+                <th class="sortable" data-sort-key="location">Storage Location <i class="fa-solid sort-ico"></i></th>
+                <th class="sortable" data-sort-key="expiryDate">Expiry Date <i class="fa-solid sort-ico"></i></th>
+                <th class="sortable" data-sort-key="status">Status <i class="fa-solid sort-ico"></i></th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="inventoryTbody"></tbody>
+          </table>
+        </div>
+
+        <div class="empty-state hidden" id="inventoryEmptyState">
+          <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="52" fill="var(--bg-input)"/>
+            <circle cx="60" cy="60" r="52" stroke="var(--border-medium)" stroke-width="1.5"/>
+            <foreignObject x="30" y="30" width="60" height="60">
+              <div xmlns="http://www.w3.org/1999/xhtml" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:26px;color:var(--text-muted);">
+                <i class="fa-solid fa-flask"></i>
+              </div>
+            </foreignObject>
+          </svg>
+          <h4>No chemicals found</h4>
+          <p>Try adjusting your search or filters, or add a new chemical to get started.</p>
+          <button class="btn btn-primary" id="emptyAddChemicalBtn"><i class="fa-solid fa-plus"></i> Add Chemical</button>
+        </div>
+
+        <div class="pagination-bar" id="paginationBar">
+          <span class="pagination-info" id="paginationInfo"></span>
+          <div class="pagination-controls" id="paginationControls"></div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- ================= Add / Edit Chemical Modal ================= -->
+<div class="modal-backdrop" id="chemModal">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-header">
+      <h3 id="chemModalTitle">Add Chemical</h3>
+      <button class="modal-close" data-close-modal aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <form id="chemForm" novalidate>
+      <div class="modal-body">
+        <input type="hidden" id="chemId">
+
+        <div class="form-group">
+          <label class="form-label" for="chemName">Chemical Name <span class="req">*</span></label>
+          <input type="text" id="chemName" class="form-control" placeholder="e.g. Sulfuric Acid">
+          <div class="form-error"><i class="fa-solid fa-circle-exclamation"></i><span>Error</span></div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="chemCategory">Category <span class="req">*</span></label>
+            <select id="chemCategory" class="form-control"></select>
+            <div class="form-error"><i class="fa-solid fa-circle-exclamation"></i><span>Error</span></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="chemUnit">Unit <span class="req">*</span></label>
+            <select id="chemUnit" class="form-control"></select>
+            <div class="form-error"><i class="fa-solid fa-circle-exclamation"></i><span>Error</span></div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="chemQuantity">Quantity <span class="req">*</span></label>
+            <input type="number" id="chemQuantity" class="form-control" min="0" step="1" placeholder="0">
+            <div class="form-error"><i class="fa-solid fa-circle-exclamation"></i><span>Error</span></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="chemReorderLevel">Reorder Level <span class="req">*</span></label>
+            <input type="number" id="chemReorderLevel" class="form-control" min="0" step="1" placeholder="0">
+            <div class="form-error"><i class="fa-solid fa-circle-exclamation"></i><span>Error</span></div>
+            <div class="form-hint">Flags as "Low Stock" at or below this quantity.</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="chemLocation">Storage Location <span class="req">*</span></label>
+          <input type="text" id="chemLocation" class="form-control" placeholder="e.g. Tank Room A - Shelf 1">
+          <div class="form-error"><i class="fa-solid fa-circle-exclamation"></i><span>Error</span></div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="chemExpiry">Expiry Date <span class="req">*</span></label>
+          <input type="date" id="chemExpiry" class="form-control">
+          <div class="form-error"><i class="fa-solid fa-circle-exclamation"></i><span>Error</span></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-close-modal>Cancel</button>
+        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> <span id="chemSubmitBtnText">Add Chemical</span></button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/inventory.js"></script>
+</body>
+</html>

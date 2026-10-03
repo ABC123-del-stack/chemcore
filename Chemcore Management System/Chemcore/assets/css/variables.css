@@ -1,0 +1,128 @@
+/* ==========================================================================
+   ChemCore  — Design Tokens
+   Palette: deep enterprise blue + teal accent + neutral surfaces
+   ========================================================================== */
+
+:root {
+  /* --- Brand colors --- */
+  --color-primary-900: #0b2559;
+  --color-primary-800: #123b82;
+  --color-primary-700: #1849a3;
+  --color-primary-600: #1d5fc9;
+  --color-primary-500: #2e73e5;
+  --color-primary-400: #5b93ec;
+  --color-primary-100: #dbe8fd;
+  --color-primary-50:  #eef4ff;
+
+  --color-teal-700: #0b6b64;
+  --color-teal-600: #0d8c82;
+  --color-teal-500: #14a89b;
+  --color-teal-400: #2dd4bf;
+  --color-teal-100: #d6f5f0;
+
+  /* --- Semantic status colors --- */
+  --color-success: #1a9e6b;
+  --color-success-bg: #e3f8ee;
+  --color-warning: #d98c0f;
+  --color-warning-bg: #fdf1dc;
+  --color-danger: #dc3b3b;
+  --color-danger-bg: #fce8e8;
+  --color-info: #2e73e5;
+  --color-info-bg: #eaf1fe;
+
+  /* --- Molecule motif accent (login signature) --- */
+  --color-accent-glow: #2dd4bf;
+
+  /* --- Light theme surfaces --- */
+  --bg-canvas: #eef2f8;
+  --bg-canvas-alt: #e6ecf5;
+  --bg-surface: #ffffff;
+  --bg-surface-glass: rgba(255, 255, 255, 0.68);
+  --bg-surface-glass-strong: rgba(255, 255, 255, 0.86);
+  --bg-sidebar: rgba(11, 37, 89, 0.97);
+  --bg-navbar: rgba(255, 255, 255, 0.78);
+  --bg-hover: rgba(29, 95, 201, 0.06);
+  --bg-input: #f6f8fc;
+
+  --border-subtle: rgba(15, 30, 60, 0.08);
+  --border-medium: rgba(15, 30, 60, 0.14);
+  --border-strong: rgba(15, 30, 60, 0.22);
+
+  --text-primary: #0e1b32;
+  --text-secondary: #4c5c76;
+  --text-muted: #8592a8;
+  --text-inverse: #f3f7ff;
+  --text-inverse2: #32c700;
+  --text-on-primary: #ffffff;
+
+  --shadow-xs: 0 1px 2px rgba(15, 30, 60, 0.06);
+  --shadow-sm: 0 2px 10px rgba(15, 30, 60, 0.06);
+  --shadow-md: 0 10px 28px rgba(15, 30, 60, 0.10);
+  --shadow-lg: 0 20px 48px rgba(15, 30, 60, 0.16);
+  --shadow-glass: 0 8px 32px rgba(15, 30, 60, 0.10);
+
+  /* --- Radii --- */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-pill: 999px;
+
+  /* --- Typography --- */
+  --font-display: 'Poppins', 'Inter', sans-serif;
+  --font-body: 'Inter', 'Poppins', sans-serif;
+
+  /* --- Layout --- */
+  --sidebar-width: 264px;
+  --sidebar-width-collapsed: 84px;
+  --navbar-height: 72px;
+  --content-max: 1440px;
+
+  /* --- Motion --- */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 0.15s var(--ease);
+  --transition-base: 0.25s var(--ease);
+  --transition-slow: 0.45s var(--ease);
+
+  /* --- Z-index scale --- */
+  --z-sidebar: 100;
+  --z-navbar: 90;
+  --z-dropdown: 200;
+  --z-modal-backdrop: 300;
+  --z-modal: 310;
+  --z-toast: 400;
+  --z-loader: 500;
+}
+
+/* --- Dark theme overrides --- */
+[data-theme="dark"] {
+  --bg-canvas: #0a1220;
+  --bg-canvas-alt: #0d1729;
+  --bg-surface: #101d33;
+  --bg-surface-glass: rgba(19, 32, 56, 0.62);
+  --bg-surface-glass-strong: rgba(19, 32, 56, 0.85);
+  --bg-sidebar: rgba(6, 15, 31, 0.98);
+  --bg-navbar: rgba(13, 23, 41, 0.72);
+  --bg-hover: rgba(93, 149, 235, 0.08);
+  --bg-input: #0c1830;
+
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-medium: rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.2);
+
+  --text-primary: #eef3fb;
+  --text-secondary: #a9b8d1;
+  --text-muted: #6f7f9c;
+  --text-inverse: #0e1b32;
+
+  --color-success-bg: rgba(26, 158, 107, 0.14);
+  --color-warning-bg: rgba(217, 140, 15, 0.14);
+  --color-danger-bg: rgba(220, 59, 59, 0.14);
+  --color-info-bg: rgba(46, 115, 229, 0.14);
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.28);
+  --shadow-md: 0 10px 28px rgba(0, 0, 0, 0.34);
+  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.44);
+  --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.4);
+}

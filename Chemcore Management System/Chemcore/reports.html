@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reports · ChemCore</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link rel="stylesheet" href="assets/css/variables.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
+
+<script src="assets/js/utils.js"></script>
+<script src="assets/js/storage.js"></script>
+<script src="assets/js/theme.js"></script>
+</head>
+<body class="app-body">
+
+<div class="page-loader" id="pageLoader">
+  <div class="spinner"></div>
+  <span class="loader-label">Loading ChemCore Reports…</span>
+</div>
+
+<div class="app-shell">
+
+  <!-- ================= Sidebar ================= -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="brand-mark"><i class="fa-solid fa-flask-vial"></i></div>
+      <div class="brand-text"><strong>ChemCore</strong><span>Reports</span></div>
+      <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Collapse sidebar"><i class="fa-solid fa-angles-left"></i></button>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+      <div class="nav-item"><a class="nav-link" href="dashboard.html"><i class="fa-solid fa-gauge-high"></i><span class="nav-text">Dashboard</span></a></div>
+      <div class="nav-item"><a class="nav-link" href="inventory.html"><i class="fa-solid fa-boxes-stacked"></i><span class="nav-text">Inventory</span></a></div>
+      <div class="nav-item"><a class="nav-link" href="safety.html"><i class="fa-solid fa-shield-heart"></i><span class="nav-text">Safety</span></a></div>
+      <div class="nav-item"><a class="nav-link" href="reports.html"><i class="fa-solid fa-chart-line"></i><span class="nav-text">Reports</span></a></div>
+      <div class="nav-section-label">Preferences</div>
+      <div class="nav-item"><a class="nav-link" href="settings.html"><i class="fa-solid fa-gear"></i><span class="nav-text">Settings</span></a></div>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="#" class="logout-link logout-trigger"><i class="fa-solid fa-right-from-bracket"></i><span class="nav-text">Log Out</span></a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ================= Main column ================= -->
+  <div class="main-col">
+    <header class="navbar">
+      <button class="navbar-menu-btn" id="navbarMenuBtn" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+      <div class="navbar-title">
+        <h1>Reports</h1>
+        <p>Inventory analytics and compliance summaries</p>
+      </div>
+      <div class="navbar-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="globalSearchInput" placeholder="Search chemicals, IDs, categories…" autocomplete="off">
+        <div class="search-suggestions hidden" id="searchSuggestions"></div>
+      </div>
+      <div class="navbar-actions">
+        <button class="icon-btn navbar-theme-btn" aria-label="Toggle theme" data-tooltip="Toggle theme"><i class="fa-solid fa-moon"></i></button>
+
+        <div class="dropdown-wrap" id="notifDropdownWrap">
+          <button class="icon-btn dropdown-trigger" aria-label="Notifications" data-tooltip="Notifications">
+            <i class="fa-solid fa-bell"></i>
+            <span class="badge-dot hidden" id="notifBadge"></span>
+          </button>
+          <div class="dropdown-panel">
+            <div class="dropdown-header"><h4>Notifications</h4><button type="button" onclick="showToast('All caught up','Notifications marked as read.','success')">Mark all read</button></div>
+            <div class="notif-list" id="notifList"></div>
+          </div>
+        </div>
+
+        <div class="dropdown-wrap" id="profileDropdownWrap">
+          <button class="profile-btn dropdown-trigger">
+            <span class="profile-avatar">SM</span>
+            <span class="profile-meta"><strong class="profile-name">Samrudhi Mhaske</strong><span class="profile-role">Plant Supervisor</span></span>
+            <i class="fa-solid fa-chevron-down" style="font-size:10px;color:var(--text-muted);"></i>
+          </button>
+          <div class="dropdown-panel">
+            <div class="profile-menu-list">
+              <a href="settings.html"><i class="fa-solid fa-user"></i> My Profile</a>
+              <a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
+              <hr>
+              <button type="button" class="logout-trigger danger"><i class="fa-solid fa-right-from-bracket"></i> Log Out</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-content page-enter">
+
+      <div class="page-heading">
+        <div>
+          <span class="eyebrow"><i class="fa-solid fa-chart-line"></i> Analytics</span>
+          <h2>Reports</h2>
+          <p class="text-secondary">Export or print a snapshot of your current inventory.</p>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-secondary" id="printReportBtn"><i class="fa-solid fa-print"></i> Print Report</button>
+          <button class="btn btn-primary" id="exportCsvBtn"><i class="fa-solid fa-file-csv"></i> Export CSV</button>
+        </div>
+      </div>
+
+      <!-- Summary tiles -->
+      <div class="report-summary-grid">
+        <div class="card summary-tile">
+          <div class="label">Total Chemicals</div>
+          <div class="value" id="repTotalChemicals">0</div>
+        </div>
+        <div class="card summary-tile">
+          <div class="label">Total Units in Stock</div>
+          <div class="value" id="repTotalUnits">0</div>
+        </div>
+        <div class="card summary-tile">
+          <div class="label">Categories Tracked</div>
+          <div class="value" id="repCategories">0</div>
+        </div>
+        <div class="card summary-tile">
+          <div class="label">Items Needing Attention</div>
+          <div class="value" id="repAttentionItems">0</div>
+        </div>
+      </div>
+
+      <!-- Monthly stock movement -->
+      <div class="card" style="margin-bottom:20px;">
+        <div class="card-header">
+          <div>
+            <h3>Monthly Stock Movement</h3>
+            <p class="text-muted">Inbound vs. outbound volume, last 6 months</p>
+          </div>
+          <div class="card-header-icon"><i class="fa-solid fa-chart-area"></i></div>
+        </div>
+        <div class="card-body">
+          <div class="chart-canvas-wrap"><canvas id="stockMovementChart"></canvas></div>
+        </div>
+      </div>
+
+      <div class="dash-grid">
+        <!-- Low stock report -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3>Low Stock Report</h3>
+              <p class="text-muted">Items at or below reorder threshold</p>
+            </div>
+            <div class="card-header-icon"><i class="fa-solid fa-battery-quarter"></i></div>
+          </div>
+          <div class="card-body" id="lowStockReport"></div>
+        </div>
+
+        <!-- Expiring chemicals -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3>Expiring Chemicals</h3>
+              <p class="text-muted">Expired or within 30 days</p>
+            </div>
+            <div class="card-header-icon"><i class="fa-solid fa-hourglass-half"></i></div>
+          </div>
+          <div class="card-body" id="expiringReport"></div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script src="assets/js/ui.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="assets/js/reports.js"></script>
+</body>
+</html>

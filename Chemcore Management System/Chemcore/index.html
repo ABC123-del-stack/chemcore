@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign In · ChemCore Management System</title>
+<meta name="description" content="Sign in to the ChemCore Smart Chemical Company.">
+
+<!-- Fonts & Icons -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- App styles -->
+<link rel="stylesheet" href="assets/css/variables.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
+
+<script src="assets/js/utils.js"></script>
+<script src="assets/js/storage.js"></script>
+<script src="assets/js/theme.js"></script>
+</head>
+<body>
+
+<!-- Page loader -->
+<div class="page-loader" id="pageLoader">
+  <div class="spinner"></div>
+  <span class="loader-label">Loading ChemCore Management System…</span>
+</div>
+
+<div class="login-shell">
+
+  <!-- ============== Hero panel (signature molecule motif) ============== -->
+  <section class="login-hero">
+    <div class="molecule-field" aria-hidden="true">
+      <svg viewBox="0 0 600 800" preserveAspectRatio="xMidYMid slice">
+        <g class="molecule-cluster" stroke="rgba(255,255,255,0.22)" stroke-width="1.4">
+          <line x1="80" y1="120" x2="180" y2="70"/>
+          <line x1="180" y1="70" x2="260" y2="140"/>
+          <line x1="180" y1="70" x2="150" y2="180"/>
+          <line x1="260" y1="140" x2="150" y2="180"/>
+        </g>
+        <g class="molecule-cluster" stroke="rgba(45,212,191,0.28)" stroke-width="1.4">
+          <line x1="420" y1="220" x2="500" y2="180"/>
+          <line x1="500" y1="180" x2="560" y2="250"/>
+          <line x1="420" y1="220" x2="460" y2="310"/>
+          <line x1="560" y1="250" x2="460" y2="310"/>
+        </g>
+        <g class="molecule-cluster" stroke="rgba(255,255,255,0.16)" stroke-width="1.4">
+          <line x1="90" y1="520" x2="180" y2="480"/>
+          <line x1="180" y1="480" x2="230" y2="560"/>
+          <line x1="90" y1="520" x2="120" y2="620"/>
+          <line x1="230" y1="560" x2="120" y2="620"/>
+          <line x1="180" y1="480" x2="270" y2="470"/>
+        </g>
+        <g class="molecule-cluster" stroke="rgba(91,147,236,0.3)" stroke-width="1.4">
+          <line x1="380" y1="600" x2="470" y2="640"/>
+          <line x1="470" y1="640" x2="440" y2="730"/>
+          <line x1="380" y1="600" x2="350" y2="700"/>
+          <line x1="440" y1="730" x2="350" y2="700"/>
+        </g>
+        <g fill="#ffffff">
+          <circle class="molecule-node" cx="80" cy="120" r="4.5"/>
+          <circle class="molecule-node" cx="180" cy="70" r="6"/>
+          <circle class="molecule-node" cx="260" cy="140" r="4.5"/>
+          <circle class="molecule-node" cx="150" cy="180" r="4.5"/>
+          <circle class="molecule-node" cx="420" cy="220" r="4.5" fill="#2dd4bf"/>
+          <circle class="molecule-node" cx="500" cy="180" r="6" fill="#2dd4bf"/>
+          <circle class="molecule-node" cx="560" cy="250" r="4.5" fill="#2dd4bf"/>
+          <circle class="molecule-node" cx="460" cy="310" r="4.5" fill="#2dd4bf"/>
+          <circle class="molecule-node" cx="90" cy="520" r="4.5"/>
+          <circle class="molecule-node" cx="180" cy="480" r="6"/>
+          <circle class="molecule-node" cx="230" cy="560" r="4.5"/>
+          <circle class="molecule-node" cx="120" cy="620" r="4.5"/>
+          <circle class="molecule-node" cx="270" cy="470" r="4"/>
+          <circle class="molecule-node" cx="380" cy="600" r="4.5" fill="#5b93ec"/>
+          <circle class="molecule-node" cx="470" cy="640" r="6" fill="#5b93ec"/>
+          <circle class="molecule-node" cx="440" cy="730" r="4.5" fill="#5b93ec"/>
+          <circle class="molecule-node" cx="350" cy="700" r="4.5" fill="#5b93ec"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="login-hero-top">
+      <div class="brand-mark"><i class="fa-solid fa-flask-vial"></i></div>
+      <div class="brand-text">
+        <strong>ChemCore</strong>
+        <span>Smart Operations Management System</span>
+      </div>
+    </div>
+
+    <div class="login-hero-content">
+      <span class="eyebrow"><i class="fa-solid fa-shield-halved"></i> Enterprise Operations Platform</span>
+      <h1>Manage Chemicals, Inventory, and Safety — All in One Place.</h1>
+      <p>Manage chemical inventory, monitor safety information, generate reports, and maintain operational records through one secure management system.</p>
+
+      <div class="hero-stats">
+        <div><strong>20+</strong><span>Chemicals Tracked</span></div>
+        <div><strong>7+</strong><span>Chemical Categories</span></div>
+        <div><strong>24/7</strong><span>Safety Monitoring</span></div>
+      </div>
+    </div>
+
+    <div class="login-hero-bottom">© 2026 Sudarshan Industries. All rights reserved.</div>
+  </section>
+
+  <!-- ============== Login form panel ============== -->
+  <section class="login-panel">
+    <div class="card glass login-card" id="loginCard">
+      <div class="login-card-head">
+        <h2>Welcome back</h2>
+        <p>Sign in to access your ChemCore management system.</p>
+      </div>
+
+      <form id="loginForm" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="loginEmail">Work Email <span class="req">*</span></label>
+          <div class="input-icon-wrap">
+            <i class="fa-solid fa-envelope"></i>
+            <input type="email" id="loginEmail" class="form-control" placeholder="you@company.com" autocomplete="username">
+          </div>
+          <div class="form-error"><i class="fa-solid fa-circle-exclamation"></i><span>Error</span></div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="loginPassword">Password <span class="req">*</span></label>
+          <div class="input-icon-wrap">
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" id="loginPassword" class="form-control" placeholder="Enter your password" autocomplete="current-password">
+            <button type="button" class="toggle-pw" id="togglePassword" aria-label="Show password"><i class="fa-solid fa-eye"></i></button>
+          </div>
+          <div class="form-error"><i class="fa-solid fa-circle-exclamation"></i><span>Error</span></div>
+        </div>
+
+        <div class="login-options">
+          <label class="form-check">
+            <input type="checkbox" id="rememberMe" checked>
+            Remember me
+          </label>
+          <a href="#" onclick="event.preventDefault(); showToast('Reset link sent', 'Check your inbox for password reset instructions.', 'info');">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" id="loginSubmitBtn">
+          <i class="fa-solid fa-right-to-bracket"></i> Sign In
+        </button>
+      </form>
+
+      <div class="demo-hint">
+        <i class="fa-solid fa-circle-info"></i>
+        <div>
+          <strong>Demo credentials:</strong> admin@chemcore.com / admin123
+          <div style="margin-top:8px;">
+            <button type="button" class="btn btn-secondary btn-sm" id="fillDemoBtn"><i class="fa-solid fa-wand-magic-sparkles"></i> Autofill demo login</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/auth.js"></script>
+</body>
+</html>

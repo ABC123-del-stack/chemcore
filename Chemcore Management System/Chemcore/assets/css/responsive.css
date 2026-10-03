@@ -1,0 +1,78 @@
+/* ==========================================================================
+   Responsive — tablet & mobile breakpoints
+   ========================================================================== */
+
+/* ===== Tablet (<=1180px) ===== */
+@media (max-width: 1180px) {
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .dash-grid { grid-template-columns: 1fr; }
+  .quick-actions-grid { grid-template-columns: repeat(2, 1fr); }
+  .contacts-grid { grid-template-columns: repeat(2, 1fr); }
+  .report-summary-grid { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .procedure-timeline { grid-template-columns: repeat(2, 1fr); }
+  .settings-grid { grid-template-columns: 220px 1fr; }
+}
+
+/* ===== Small tablet / large mobile (<=900px) ===== */
+@media (max-width: 900px) {
+  .sidebar {
+    transform: translateX(-100%);
+    width: var(--sidebar-width);
+  }
+  .sidebar.mobile-open { transform: translateX(0); box-shadow: var(--shadow-lg); }
+  .sidebar.collapsed { width: var(--sidebar-width); }
+  .sidebar.collapsed .brand-text,
+  .sidebar.collapsed .nav-link .nav-text,
+  .sidebar.collapsed .logout-link .nav-text,
+  .sidebar.collapsed .nav-section-label { display: block; opacity: 1; height: auto; }
+  .sidebar.collapsed .nav-link, .sidebar.collapsed .logout-link { justify-content: flex-start; }
+
+  .main-col, .sidebar.collapsed ~ .main-col { margin-left: 0; }
+
+  .navbar-menu-btn { display: flex; }
+  .sidebar-toggle-btn { display: none; }
+
+  .navbar-title p { display: none; }
+  .navbar-search { display: none; }
+
+  .profile-meta { display: none; }
+
+  .settings-grid { grid-template-columns: 1fr; }
+  .settings-nav { flex-direction: row; overflow-x: auto; }
+}
+
+/* ===== Tablet portrait (<=768px) ===== */
+@media (max-width: 768px) {
+  .page-content { padding: 20px 16px 50px; }
+  .navbar { padding: 0 16px; gap: 10px; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .quick-actions-grid { grid-template-columns: 1fr 1fr; }
+  .contacts-grid { grid-template-columns: 1fr; }
+  .report-summary-grid { grid-template-columns: 1fr 1fr; }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .procedure-timeline { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .checklist-grid { grid-template-columns: 1fr; }
+  .login-card { padding: 30px 24px 26px; }
+  .filter-bar { padding: 14px 16px; }
+  .card-header, .card-body { padding: 16px; }
+}
+
+/* ===== Mobile (<=560px) ===== */
+@media (max-width: 560px) {
+  .kpi-grid { grid-template-columns: 1fr; }
+  .quick-actions-grid { grid-template-columns: 1fr; }
+  .report-summary-grid { grid-template-columns: 1fr; }
+  .navbar-title h1 { font-size: 16.5px; }
+  .page-heading h2 { font-size: 19px; }
+  .page-heading { flex-direction: column; align-items: flex-start; }
+  .page-actions { width: 100%; }
+  .page-actions .btn { flex: 1; }
+  .toast-container { top: 12px; right: 12px; left: 12px; width: auto; }
+  .modal { max-width: 100%; }
+  .dropdown-panel { width: min(320px, calc(100vw - 32px)); right: -8px; }
+  .stat-value { font-size: 26px; }
+  .icon-btn { width: 36px; height: 36px; }
+}

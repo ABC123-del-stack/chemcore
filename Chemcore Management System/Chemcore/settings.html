@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Settings · ChemCore</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link rel="stylesheet" href="assets/css/variables.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
+
+<script src="assets/js/utils.js"></script>
+<script src="assets/js/storage.js"></script>
+<script src="assets/js/theme.js"></script>
+</head>
+<body class="app-body">
+
+<div class="page-loader" id="pageLoader">
+  <div class="spinner"></div>
+  <span class="loader-label">Loading ChemCore Sttings…</span>
+</div>
+
+<div class="app-shell">
+
+  <!-- ================= Sidebar ================= -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="brand-mark"><i class="fa-solid fa-flask-vial"></i></div>
+      <div class="brand-text"><strong>ChemCore</strong><span>Settings</span></div>
+      <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Collapse sidebar"><i class="fa-solid fa-angles-left"></i></button>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+      <div class="nav-item"><a class="nav-link" href="dashboard.html"><i class="fa-solid fa-gauge-high"></i><span class="nav-text">Dashboard</span></a></div>
+      <div class="nav-item"><a class="nav-link" href="inventory.html"><i class="fa-solid fa-boxes-stacked"></i><span class="nav-text">Inventory</span></a></div>
+      <div class="nav-item"><a class="nav-link" href="safety.html"><i class="fa-solid fa-shield-heart"></i><span class="nav-text">Safety</span></a></div>
+      <div class="nav-item"><a class="nav-link" href="reports.html"><i class="fa-solid fa-chart-line"></i><span class="nav-text">Reports</span></a></div>
+      <div class="nav-section-label">Preferences</div>
+      <div class="nav-item"><a class="nav-link" href="settings.html"><i class="fa-solid fa-gear"></i><span class="nav-text">Settings</span></a></div>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="#" class="logout-link logout-trigger"><i class="fa-solid fa-right-from-bracket"></i><span class="nav-text">Log Out</span></a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ================= Main column ================= -->
+  <div class="main-col">
+    <header class="navbar">
+      <button class="navbar-menu-btn" id="navbarMenuBtn" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+      <div class="navbar-title">
+        <h1>Settings</h1>
+        <p>Manage company profile and preferences</p>
+      </div>
+      <div class="navbar-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="globalSearchInput" placeholder="Search chemicals, IDs, categories…" autocomplete="off">
+        <div class="search-suggestions hidden" id="searchSuggestions"></div>
+      </div>
+      <div class="navbar-actions">
+        <button class="icon-btn navbar-theme-btn" aria-label="Toggle theme" data-tooltip="Toggle theme"><i class="fa-solid fa-moon"></i></button>
+
+        <div class="dropdown-wrap" id="notifDropdownWrap">
+          <button class="icon-btn dropdown-trigger" aria-label="Notifications" data-tooltip="Notifications">
+            <i class="fa-solid fa-bell"></i>
+            <span class="badge-dot hidden" id="notifBadge"></span>
+          </button>
+          <div class="dropdown-panel">
+            <div class="dropdown-header"><h4>Notifications</h4><button type="button" onclick="showToast('All caught up','Notifications marked as read.','success')">Mark all read</button></div>
+            <div class="notif-list" id="notifList"></div>
+          </div>
+        </div>
+
+        <div class="dropdown-wrap" id="profileDropdownWrap">
+          <button class="profile-btn dropdown-trigger">
+            <span class="profile-avatar">SM</span>
+            <span class="profile-meta"><strong class="profile-name">Samrudhi Mhaske</strong><span class="profile-role">Plant Supervisor</span></span>
+            <i class="fa-solid fa-chevron-down" style="font-size:10px;color:var(--text-muted);"></i>
+          </button>
+          <div class="dropdown-panel">
+            <div class="profile-menu-list">
+              <a href="settings.html"><i class="fa-solid fa-user"></i> My Profile</a>
+              <a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
+              <hr>
+              <button type="button" class="logout-trigger danger"><i class="fa-solid fa-right-from-bracket"></i> Log Out</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-content page-enter">
+
+      <div class="page-heading">
+        <div>
+          <span class="eyebrow"><i class="fa-solid fa-gear"></i> Preferences</span>
+          <h2>Settings</h2>
+          <p class="text-secondary">Configure your company profile, appearance, and data.</p>
+        </div>
+      </div>
+
+      <div class="settings-grid">
+        <!-- Settings nav -->
+        <div class="card">
+          <div class="settings-nav">
+            <button class="active" data-panel="panelCompany"><i class="fa-solid fa-building"></i> Company Information</button>
+            <button data-panel="panelAppearance"><i class="fa-solid fa-palette"></i> Appearance</button>
+            <button data-panel="panelNotifications"><i class="fa-solid fa-bell"></i> Notifications</button>
+            <button data-panel="panelData"><i class="fa-solid fa-database"></i> Data Management</button>
+          </div>
+        </div>
+
+        <!-- Settings panels -->
+        <div>
+          <!-- Company info -->
+          <div class="card settings-panel active" id="panelCompany">
+            <div class="card-header">
+              <div><h3>Company Information</h3><p class="text-muted">Displayed across reports and documents</p></div>
+              <div class="card-header-icon"><i class="fa-solid fa-building"></i></div>
+            </div>
+            <div class="card-body">
+              <form id="companyForm" novalidate>
+                <div class="form-group">
+                  <label class="form-label" for="companyName">Company Name</label>
+                  <input type="text" id="companyName" class="form-control">
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label" for="companyEmail">Operations Email</label>
+                    <input type="email" id="companyEmail" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="companyPhone">Phone Number</label>
+                    <input type="text" id="companyPhone" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="companyAddress">Facility Address</label>
+                  <input type="text" id="companyAddress" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="companyLicense">Chemical Handling License #</label>
+                  <input type="text" id="companyLicense" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Appearance -->
+          <div class="card settings-panel" id="panelAppearance">
+            <div class="card-header">
+              <div><h3>Appearance</h3><p class="text-muted">Choose how ChemCore looks on your device</p></div>
+              <div class="card-header-icon"><i class="fa-solid fa-palette"></i></div>
+            </div>
+            <div class="card-body">
+              <div class="settings-row" style="border-bottom:none;padding-bottom:0;">
+                <div class="sr-text"><strong>Theme</strong><span>Applies instantly and is remembered on this device</span></div>
+              </div>
+              <div class="theme-options" style="margin-top:14px;">
+                <button type="button" class="theme-option" data-theme="light"><i class="fa-solid fa-sun"></i><span>Light</span></button>
+                <button type="button" class="theme-option" data-theme="dark"><i class="fa-solid fa-moon"></i><span>Dark</span></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Notifications -->
+          <div class="card settings-panel" id="panelNotifications">
+            <div class="card-header">
+              <div><h3>Notifications</h3><p class="text-muted">Control alerts for stock and safety events</p></div>
+              <div class="card-header-icon"><i class="fa-solid fa-bell"></i></div>
+            </div>
+            <div class="card-body">
+              <div class="settings-row">
+                <div class="sr-text">
+                  <strong>Stock &amp; Safety Alerts</strong>
+                  <span>Show badge and bell notifications for low stock, expiring, and incident events</span>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="notifToggle">
+                  <span class="switch-track"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Data management -->
+          <div class="card settings-panel" id="panelData">
+            <div class="card-header">
+              <div><h3>Data Management</h3><p class="text-muted">All data is stored locally in this browser</p></div>
+              <div class="card-header-icon"><i class="fa-solid fa-database"></i></div>
+            </div>
+            <div class="card-body">
+              <div class="danger-zone">
+                <h4><i class="fa-solid fa-triangle-exclamation"></i> Reset Sample Data</h4>
+                <p>Restores the original 20 sample chemicals and clears any chemicals, incidents, and PPE checklist progress you've added. This cannot be undone.</p>
+                <button class="btn btn-danger" id="resetDataBtn"><i class="fa-solid fa-rotate-left"></i> Reset Sample Data</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/settings.js"></script>
+</body>
+</html>

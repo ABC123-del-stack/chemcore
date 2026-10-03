@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Safety · ChemCore</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link rel="stylesheet" href="assets/css/variables.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
+
+<script src="assets/js/utils.js"></script>
+<script src="assets/js/storage.js"></script>
+<script src="assets/js/theme.js"></script>
+</head>
+<body class="app-body">
+
+<div class="page-loader" id="pageLoader">
+  <div class="spinner"></div>
+  <span class="loader-label">Loading ChemCore Safety…</span>
+</div>
+
+<div class="app-shell">
+
+  <!-- ================= Sidebar ================= -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="brand-mark"><i class="fa-solid fa-flask-vial"></i></div>
+      <div class="brand-text"><strong>ChemCore</strong><span>Safety</span></div>
+      <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Collapse sidebar"><i class="fa-solid fa-angles-left"></i></button>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+      <div class="nav-item"><a class="nav-link" href="dashboard.html"><i class="fa-solid fa-gauge-high"></i><span class="nav-text">Dashboard</span></a></div>
+      <div class="nav-item"><a class="nav-link" href="inventory.html"><i class="fa-solid fa-boxes-stacked"></i><span class="nav-text">Inventory</span></a></div>
+      <div class="nav-item"><a class="nav-link" href="safety.html"><i class="fa-solid fa-shield-heart"></i><span class="nav-text">Safety</span></a></div>
+      <div class="nav-item"><a class="nav-link" href="reports.html"><i class="fa-solid fa-chart-line"></i><span class="nav-text">Reports</span></a></div>
+      <div class="nav-section-label">Preferences</div>
+      <div class="nav-item"><a class="nav-link" href="settings.html"><i class="fa-solid fa-gear"></i><span class="nav-text">Settings</span></a></div>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="#" class="logout-link logout-trigger"><i class="fa-solid fa-right-from-bracket"></i><span class="nav-text">Log Out</span></a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ================= Main column ================= -->
+  <div class="main-col">
+    <header class="navbar">
+      <button class="navbar-menu-btn" id="navbarMenuBtn" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+      <div class="navbar-title">
+        <h1>Safety</h1>
+        <p>Emergency contacts, procedures, and incident reporting</p>
+      </div>
+      <div class="navbar-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="globalSearchInput" placeholder="Search chemicals, IDs, categories…" autocomplete="off">
+        <div class="search-suggestions hidden" id="searchSuggestions"></div>
+      </div>
+      <div class="navbar-actions">
+        <button class="icon-btn navbar-theme-btn" aria-label="Toggle theme" data-tooltip="Toggle theme"><i class="fa-solid fa-moon"></i></button>
+
+        <div class="dropdown-wrap" id="notifDropdownWrap">
+          <button class="icon-btn dropdown-trigger" aria-label="Notifications" data-tooltip="Notifications">
+            <i class="fa-solid fa-bell"></i>
+            <span class="badge-dot hidden" id="notifBadge"></span>
+          </button>
+          <div class="dropdown-panel">
+            <div class="dropdown-header"><h4>Notifications</h4><button type="button" onclick="showToast('All caught up','Notifications marked as read.','success')">Mark all read</button></div>
+            <div class="notif-list" id="notifList"></div>
+          </div>
+        </div>
+
+        <div class="dropdown-wrap" id="profileDropdownWrap">
+          <button class="profile-btn dropdown-trigger">
+            <span class="profile-avatar">SM</span>
+            <span class="profile-meta"><strong class="profile-name">Samrudhi Mhaske</strong><span class="profile-role">Plant Supervisor</span></span>
+            <i class="fa-solid fa-chevron-down" style="font-size:10px;color:var(--text-muted);"></i>
+          </button>
+          <div class="dropdown-panel">
+            <div class="profile-menu-list">
+              <a href="settings.html"><i class="fa-solid fa-user"></i> My Profile</a>
+              <a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
+              <hr>
+              <button type="button" class="logout-trigger danger"><i class="fa-solid fa-right-from-bracket"></i> Log Out</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-content page-enter">
+
+      <div class="page-heading">
+        <div>
+          <span class="eyebrow"><i class="fa-solid fa-shield-heart"></i> Safety Center</span>
+          <h2>Safety &amp; Compliance</h2>
+          <p class="text-secondary">Everything your team needs in an emergency, in one place.</p>
+        </div>
+      </div>
+
+      <!-- Emergency contacts -->
+      <div class="contacts-grid" style="margin-bottom:20px;">
+        <div class="card card-hover contact-card">
+          <div class="contact-avatar" style="background:linear-gradient(135deg,#c73030,#e8676a);"><i class="fa-solid fa-truck-medical"></i></div>
+          <h4>Emergency Response</h4>
+          <div class="role">24/7 Plant Hotline</div>
+          <a class="phone" href="tel:911"><i class="fa-solid fa-phone"></i> 911</a>
+        </div>
+        <div class="card card-hover contact-card">
+          <div class="contact-avatar" style="background:linear-gradient(135deg,var(--color-primary-600),var(--color-primary-400));"><i class="fa-solid fa-user-shield"></i></div>
+          <h4>Safety Officer</h4>
+          <div class="role">Dana Whitfield</div>
+          <a class="phone" href="tel:+14155550117"><i class="fa-solid fa-phone"></i> (415) 555-0117</a>
+        </div>
+        <div class="card card-hover contact-card">
+          <div class="contact-avatar" style="background:linear-gradient(135deg,var(--color-teal-600),var(--color-teal-400));"><i class="fa-solid fa-briefcase-medical"></i></div>
+          <h4>Site Medical Bay</h4>
+          <div class="role">On-site First Aid</div>
+          <a class="phone" href="tel:+14155550142"><i class="fa-solid fa-phone"></i> (415) 555-0142</a>
+        </div>
+        <div class="card card-hover contact-card">
+          <div class="contact-avatar" style="background:linear-gradient(135deg,#c97a0e,#eab040);"><i class="fa-solid fa-fire-extinguisher"></i></div>
+          <h4>Fire &amp; Hazmat</h4>
+          <div class="role">Bay Point Fire Dept.</div>
+          <a class="phone" href="tel:+14155550199"><i class="fa-solid fa-phone"></i> (415) 555-0199</a>
+        </div>
+      </div>
+
+      <div class="dash-grid" style="margin-bottom:20px;">
+        <!-- Safety guidelines -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3>Safety Guidelines</h3>
+              <p class="text-muted">Standard operating precautions</p>
+            </div>
+            <div class="card-header-icon"><i class="fa-solid fa-clipboard-list"></i></div>
+          </div>
+          <div class="card-body">
+            <ul class="guidelines-list">
+              <li><i class="fa-solid fa-check"></i> Always verify container labels and Safety Data Sheets (SDS) before handling any chemical.</li>
+              <li><i class="fa-solid fa-check"></i> Store acids and bases in separate, clearly marked cabinets to avoid reactive mixing.</li>
+              <li><i class="fa-solid fa-check"></i> Ensure fume hoods and ventilation systems are active before opening volatile solvents.</li>
+              <li><i class="fa-solid fa-check"></i> Never return unused chemical to its original container — dispose per site protocol.</li>
+              <li><i class="fa-solid fa-check"></i> Keep spill kits and eyewash stations accessible within 10 seconds of any work area.</li>
+              <li><i class="fa-solid fa-check"></i> Report any damaged container, leak, or unusual odor to the Safety Officer immediately.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- PPE checklist -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3>PPE Checklist</h3>
+              <p class="text-muted">Confirm before entering the work floor</p>
+            </div>
+            <div class="card-header-icon"><i class="fa-solid fa-vest"></i></div>
+          </div>
+          <div class="card-body">
+            <div class="checklist-grid" id="ppeChecklist"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Emergency procedure timeline -->
+      <div class="card" style="margin-bottom:20px;">
+        <div class="card-header">
+          <div>
+            <h3>Emergency Procedure</h3>
+            <p class="text-muted">Follow these steps in order during any chemical incident</p>
+          </div>
+          <div class="card-header-icon"><i class="fa-solid fa-route"></i></div>
+        </div>
+        <div class="card-body">
+          <div class="procedure-timeline">
+            <div class="procedure-step">
+              <div class="step-num">1</div>
+              <h4>Contain &amp; Alert</h4>
+              <p>Evacuate the immediate area and pull the nearest alarm. Alert coworkers verbally if possible.</p>
+            </div>
+            <div class="procedure-step">
+              <div class="step-num">2</div>
+              <h4>Notify Response Team</h4>
+              <p>Call the Emergency Response hotline and provide chemical name, location, and severity.</p>
+            </div>
+            <div class="procedure-step">
+              <div class="step-num">3</div>
+              <h4>Administer First Aid</h4>
+              <p>Use eyewash/shower stations for exposure. Do not move injured personnel unless necessary.</p>
+            </div>
+            <div class="procedure-step">
+              <div class="step-num">4</div>
+              <h4>Report &amp; Review</h4>
+              <p>File an incident report below within 24 hours. Safety team will review and follow up.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dash-grid">
+        <!-- Incident report form -->
+        <div class="card" id="incidentFormCard">
+          <div class="card-header">
+            <div>
+              <h3>Report an Incident</h3>
+              <p class="text-muted">Submit details as soon as possible</p>
+            </div>
+            <div class="card-header-icon"><i class="fa-solid fa-file-pen"></i></div>
+          </div>
+          <div class="card-body">
+            <form id="incidentForm" novalidate>
+              <div class="form-group">
+                <label class="form-label" for="incidentName">Employee Name <span class="req">*</span></label>
+                <input type="text" id="incidentName" class="form-control" placeholder="Full name">
+                <div class="form-error"><i class="fa-solid fa-circle-exclamation"></i><span>Error</span></div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="incidentDept">Department <span class="req">*</span></label>
+                  <select id="incidentDept" class="form-control">
+                    <option value="">Select department</option>
+                    <option>Production</option>
+                    <option>Warehouse</option>
+                    <option>Quality Control</option>
+                    <option>Maintenance</option>
+                    <option>Logistics</option>
+                    <option>Administration</option>
+                  </select>
+                  <div class="form-error"><i class="fa-solid fa-circle-exclamation"></i><span>Error</span></div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="incidentType">Incident Type <span class="req">*</span></label>
+                  <select id="incidentType" class="form-control">
+                    <option value="">Select type</option>
+                    <option>Chemical Spill</option>
+                    <option>Exposure / Inhalation</option>
+                    <option>Fire Hazard</option>
+                    <option>Equipment Malfunction</option>
+                    <option>Improper Storage</option>
+                    <option>Near Miss</option>
+                    <option>Other</option>
+                  </select>
+                  <div class="form-error"><i class="fa-solid fa-circle-exclamation"></i><span>Error</span></div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="incidentDesc">Description <span class="req">*</span></label>
+                <textarea id="incidentDesc" class="form-control" placeholder="What happened? Include location and any immediate actions taken."></textarea>
+                <div class="form-error"><i class="fa-solid fa-circle-exclamation"></i><span>Error</span></div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="incidentDate">Date <span class="req">*</span></label>
+                <input type="date" id="incidentDate" class="form-control">
+                <div class="form-error"><i class="fa-solid fa-circle-exclamation"></i><span>Error</span></div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block"><i class="fa-solid fa-paper-plane"></i> Submit Report</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Incident log -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3>Recent Incident Reports</h3>
+              <p class="text-muted">Logged submissions from your team</p>
+            </div>
+            <div class="card-header-icon"><i class="fa-solid fa-list-check"></i></div>
+          </div>
+          <div class="card-body">
+            <div class="incidents-log" id="incidentLog"></div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/safety.js"></script>
+</body>
+</html>
